@@ -1,0 +1,58 @@
+- name: Instalaciones del server 
+  hosts: Server
+  user: root 
+  tasks:
+  
+   - name: Instalacion sshpass
+     apt:
+       name: sshpass
+       state: present
+       update_cache: yes
+   - name: Instalar repositorio Ansible 
+     apt_repository:
+       repo: 'ppa:ansible/ansible'
+       state: present 
+       update_cache: yes
+   - name: Instalar Ansible 
+     apt: 
+       name: ansible
+       state: present 
+   - name: Instalar squid 
+     apt:
+       name: squid
+       state: present 
+   - name: crontab
+     apt:
+       name: cron 
+       state: present 
+   - name: Instalar Docker
+     apt:
+       name: docker.io
+       state: present
+   - name: Instalar y habilitar docker
+     service: 
+       name: docker
+       state: started
+       enabled: yes
+   - name: Descargar docker compose
+     shell: >
+       curl -L https://github.com/docker/compose/releases/download/$(curl -s https://api.github.com/repos/docker/compose/release/latest | jq -r .tag_name)/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+     args:
+       creates: /usr/local/bin/docker-compose
+   - name: Dar permisos de ejecución a docker-compose 
+     file:
+       path: /usr/local/bin/docker-compose
+       mode: 'u+x'
+   - name: Instalar rsync 
+     apt:
+       name: rsync 
+       state: present 
+   - name: Instalar Apache2
+     apt:
+       name: apache2
+       state: present 
+   - name: Iniciar y habilitar apache
+     service: 
+       name: apache2
+       state: started 
+       enabled: yes 
