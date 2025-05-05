@@ -1,0 +1,21 @@
+- name: Preparar clientes 
+  hosts: server
+  user: root 
+  tasks:
+    - name: Crear un directorio
+      file:
+        path: /home/usuario/ansible_cliente 
+        state: directory
+        mode: '0755'  
+
+    - name: copiar archivo con ansible.
+      copy:
+       src: ansibles/docs/instalaciones
+       dest: /home/usuario/ansible_cliente/playbook.yml  
+       mode: '0644'
+   - name: copiar archivo hosts
+     copy: 
+       src: hostsc
+       dest: /home/usuario/ansible_cliente/hosts
+   - name: ejecutar comando ansible 
+     command: ansible-playbook -i anisible_cliente/hosts ansible_cliente/playbook.yml
