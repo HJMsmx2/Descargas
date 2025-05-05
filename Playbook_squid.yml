@@ -1,0 +1,12 @@
+- name: squid 
+  hosts: Server
+  user: root 
+  tasks:
+  -  name: configuracíon squid
+     ansible.built.copy: 
+       src: ansibles/docs/configuracion_squid (fichero donde estara la configuracíon) 
+       dest: /etc/squid/squid.conf 
+  - name: Reiniciar squid 
+    ansible.builtin.systemd:
+      name: squid 
+      state: restarted 
