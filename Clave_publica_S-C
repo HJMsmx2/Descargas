@@ -1,3 +1,4 @@
+ssh root@"$VIP1" << EOF 
 
 if [[ -f ~/.ssh/id_rsa.pub ]]; then
     read -p "[?] Ya existe una clave SSH en ~/.ssh/id_rsa.pub. ¿Deseas sobrescribirla? (s/n): " RESP
@@ -23,3 +24,6 @@ done
 
 echo "[+] Copiando clave SSH al root del servidor..."
 sshpass -p "$PASSsv2" ssh-copy-id root@"$SVIP1"
+
+exit
+EOF
