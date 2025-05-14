@@ -320,3 +320,4 @@ ssh root@$SVIP1 << EOF
     "
 EOF
 
+echo "Script terminado"
