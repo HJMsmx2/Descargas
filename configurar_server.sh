@@ -109,15 +109,6 @@ done
 echo "[+] Copiando clave SSH al root del servidor..."
 sshpass -p "$PASSsv2" ssh-copy-id root@"$SVIP1"
 
-PLAYBOOK=(
-    "Playbook_instalaciones.yml"
-    "Playbook_KEA.yml"
-    "Playbook_squid.yml"
-    "Playbook_dns.yml"
-    "Playbooks_cliente"
-
-)
-
 
 for PLAYBOOK in "${PLAYBOOK[@]}"; do
     echo "Ejecutando $PLAYBOOK..."
