@@ -1,2 +1,2 @@
 [Server]
-Server1 ansible_host=root@192.168.237.2  
+Server1 ansible_host=root@192.168.237.2 ansible_user=root
