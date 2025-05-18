@@ -178,7 +178,6 @@ cat > $PROYECTO/roles/samba_ad_dc/tasks/main.yml <<'EOF'
     dest: /etc/resolv.conf
     content: |
       nameserver {{ ip_address }}
-      nameserver {{ dns_forwarder }}
       search {{ domain_name }}
 
 - name: Verificar si resolv.conf es inmutable
