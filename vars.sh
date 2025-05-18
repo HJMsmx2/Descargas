@@ -17,7 +17,6 @@ PLAYBOOK=(
     "Playbook_KEA.yml"
     "Playbook_squid.yml"
     "Playbook_dns.yml"
-    "Playbooks_cliente"
 
 )
 PCIP3="192.168.1.3"
