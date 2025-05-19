@@ -13,9 +13,9 @@
        src: ansibles/docs/instalaciones
        dest: /home/usuario/ansible_cliente/playbook.yml  
        mode: '0644'
-   - name: copiar archivo hosts
-     copy: 
+    - name: copiar archivo hosts
+      copy: 
        src: hostsc
        dest: /home/usuario/ansible_cliente/hosts
-   - name: ejecutar comando ansible 
-     command: ansible-playbook -i anisible_cliente/hosts ansible_cliente/playbook.yml
+    - name: ejecutar comando ansible 
+      command: ansible-playbook -i anisible_cliente/hosts ansible_cliente/playbook.yml
