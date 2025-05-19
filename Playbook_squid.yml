@@ -4,7 +4,7 @@
   tasks:
   -  name: configuracíon squid
      ansible.builtin.copy: 
-       src: ansibles/docs/Configuracion_squid
+       remote_src: ansibles/docs/configuracion_squid
        dest: /etc/squid/squid.conf 
   - name: Reiniciar squid 
     ansible.builtin.systemd:
