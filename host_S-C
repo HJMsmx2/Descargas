@@ -1,10 +1,3 @@
 [Cliente]
-Cliente1 ansible_host=root@192.168.1.101
-Cliente2 ansible_host=root@192.168.1.102
-Cliente3 ansible_host=root@192.168.1.103
-Cliente4 ansible_host=root@192.168.1.104
-Cliente5 ansible_host=root@192.168.1.105
-Cliente6 ansible_host=root@192.168.1.106
-Cliente7 ansible_host=root@192.168.1.107
-Cliente8 ansible_host=root@192.168.1.108
-
+Cliente3 ansible_host=root@192.168.1.3
+Cliente4 ansible_host=root@192.168.1.4
