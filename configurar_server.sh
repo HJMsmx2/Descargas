@@ -5,7 +5,7 @@
 
 # Cargar variables
 source ./vars.sh
-
+start=$(date +%s)
 SVIP0=$1  # IP actual del servidor (se pasa como argumento al ejecutar el script)
 
 # ------------------------------------------------------------------
@@ -291,5 +291,8 @@ cd $PROYECTO/
 ansible-playbook -i inventory/hosts playbook.yml
 
 echo "Ansible terminado"
+end=$(date +%s)
+runtime=$((end - start))
 
+echo "Tiempo de ejecución: $runtime segundos"
 
