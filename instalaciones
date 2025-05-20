@@ -1,5 +1,5 @@
 - name: Instalaciones
-  hosts: cliente
+  hosts: Cliente
   user: root
   tasks:
     - name: Actualizar la lista de paquetes
