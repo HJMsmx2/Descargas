@@ -109,6 +109,7 @@ done
 echo "[+] Copiando clave SSH al root del servidor..."
 sshpass -p "$PASSsv2" ssh-copy-id root@"$SVIP1"
 
+sleep 5
 
 for PLAYBOOK in "${PLAYBOOK[@]}"; do
     echo "Ejecutando $PLAYBOOK..."
