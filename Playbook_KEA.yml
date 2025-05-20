@@ -10,7 +10,7 @@
 
     - name: Configurar el servidor DHCP KEA
       ansible.builtin.copy:
-        src: ansibles/docs/KEA 
+        src: /home/usuario/ansibles/docs/KEA 
         dest: /etc/kea/kea-dhcp4.conf
 
     - name: Activar IP forwarding temporalmente
