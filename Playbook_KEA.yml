@@ -1,5 +1,5 @@
 - name: Prueba kea
-  hosts: prueba
+  hosts: Server
   user: root
   tasks:
     - name: Instal·lar el servidor DHCP KEA
