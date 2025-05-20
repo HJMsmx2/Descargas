@@ -1,63 +1,63 @@
 #!/bin/bash
-#generar clave publica ssh y copiarla linea 23 y cambiar variables y establecerlas para el cliente 
+
+# Cargar variables
 source ./vars.sh
-# Ejecutar el script en la máquina remota
-ssh root@$SVIP1 << EOF
-    echo "[+] Instalando sshpass y ansible..."
-    echo "$PASSsv1" | sudo -S apt install -y sshpass 
 
-    sshpass -p "$PASSsv1" ssh -o StrictHostKeyChecking=no "$USERsv1@$PCIP3" bash << EOF
-    echo "$PASSsv1" | sudo -S bash -c '
-    echo "[+] Cambiando contraseña de root..."
-    echo "root:$PASSsv2" | chpasswd
+# Comprobar que todas las variables necesarias están definidas
+if [[ -z "$SVIP1" || -z "$PASSsv1" || -z "$USERsv1" || -z "$PCIP3" || -z "$PASSsv2" || -z "$directorio_ansible" ]]; then
+    echo "[!] Faltan variables necesarias en vars.sh"
+    exit 1
+fi
 
-    echo "[+] Cambiando hostname a Server..."
-    hostnamectl set-hostname Cliente1
+echo "[+] Conectando con el servidor intermedio ($SVIP1)..."
+ssh root@$SVIP1 << EOF1
+    echo "[+] Instalando sshpass si es necesario..."
+    apt-get update && apt-get install -y sshpass
 
-    echo "[+] Habilitando acceso root por SSH..."
-    sed -i "s/^#\\?PermitRootLogin .*/PermitRootLogin yes/" /etc/ssh/sshd_config
-    systemctl restart ssh
-   
-    EOF
-   
-    if [[ -f ~/.ssh/id_rsa.pub ]]; then
-    read -p "[?] Ya existe una clave SSH en ~/.ssh/id_rsa.pub. ¿Deseas sobrescribirla? (s/n): " RESP
-    if [[ "$RESP" == "s" || "$RESP" == "S" ]]; then
-        echo "[+] Eliminando clave SSH antigua..."
-        rm -f ~/.ssh/id_rsa ~/.ssh/id_rsa.pub
+    echo "[+] Conectando con el cliente ($PCIP3)..."
+    sshpass -p "$PASSsv1" ssh -o StrictHostKeyChecking=no "$USERsv1@$PCIP3" bash << EOF2
+        echo "[+] Elevando privilegios para tareas administrativas..."
+        echo "$PASSsv1" | sudo -S bash -c '
+            echo "[+] Cambiando contraseña del root..."
+            echo "root:$PASSsv2" | chpasswd
+
+            echo "[+] Estableciendo hostname a Cliente1..."
+            hostnamectl set-hostname Cliente1
+
+            echo "[+] Habilitando acceso SSH para root..."
+            sed -i "s/^#\\?PermitRootLogin .*/PermitRootLogin yes/" /etc/ssh/sshd_config
+            systemctl restart ssh
+        '
+EOF2
+
+    echo "[+] Comprobando clave SSH local en el servidor..."
+    if [[ ! -f ~/.ssh/id_rsa.pub ]]; then
         echo "[+] Generando nueva clave SSH..."
         ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""
     else
-        echo "[i] Se usará la clave SSH existente."
+        echo "[i] Clave SSH ya existe. Usando la existente."
     fi
-else
-    echo "[+] Generando clave SSH..."
-    ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""
-fi
 
-echo "[...] Esperando a que la máquina Server esté disponible en $PCIP3..."
-for i in {1..10}; do
-    ping -c 1 "$PCIP3" > /dev/null 2>&1 && break
-    echo "Esperando... ($PCIP3)"
-    sleep 3
-done
+    echo "[+] Esperando disponibilidad del cliente ($PCIP3)..."
+    for i in {1..10}; do
+        ping -c 1 "$PCIP3" > /dev/null 2>&1 && break
+        echo "Esperando... ($PCIP3)"
+        sleep 3
+    done
 
-echo "[+] Copiando clave SSH al root del servidor..."
-sshpass -p "$PASSsv2" ssh-copy-id root@"$PCIP3"
-    
+    echo "[+] Copiando clave SSH al cliente (root@$PCIP3)..."
+    sshpass -p "$PASSsv2" ssh-copy-id -o StrictHostKeyChecking=no root@"$PCIP3"
 
-    # Cambiar al usuario especificado
+    echo "[+] Ejecutando playbook Ansible en el servidor..."
     su - usuario -c "
-
-        # Verificar si el directorio ansible_cliente existe
         if [ -d '$directorio_ansible' ]; then
             cd '$directorio_ansible'
             ansible-playbook -i hosts playbook.yml
         else
-            echo 'Directorio ansible_cliente no encontrado'
+            echo '[!] El directorio Ansible no se encontró: $directorio_ansible'
+            exit 1
         fi
     "
-    exit
-EOF
+EOF1
 
-echo "Script terminado"
+echo "[✔] Script terminado correctamente"
