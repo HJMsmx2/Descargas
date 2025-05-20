@@ -1,5 +1,5 @@
 - name: Preparar clientes 
-  hosts: server
+  hosts: Server
   user: root 
   tasks:
     - name: Crear un directorio
