@@ -1,3 +1,2 @@
 [Cliente]
-Cliente3 ansible_host=root@192.168.1.3
-Cliente4 ansible_host=root@192.168.1.4
+Cliente3 ansible_host=root@192.168.1.3 ansible_user=root ansible_ssh_pass=contraseñaRoot ansible_ssh_common_args='-o StrictHostKeyChecking=no'
