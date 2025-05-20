@@ -168,27 +168,21 @@ cat > $PROYECTO/roles/samba_ad_dc/tasks/main.yml <<'EOF'
     enabled: no
     state: stopped
 
-- name: Eliminar /etc/resolv.conf
+######- name: Eliminar /etc/resolv.conf
   ansible.builtin.file:
     path: /etc/resolv.conf
     state: absent
 
-- name: Crear /etc/resolv.conf
+- name: Crear /etc/newresolv.conf
   ansible.builtin.copy:
-    dest: /etc/resolv.conf
+    dest: /etc/newresolv.conf
     content: |
       nameserver {{ ip_address }}
       search {{ domain_name }}
 
-- name: Verificar si resolv.conf es inmutable
-  ansible.builtin.shell: lsattr /etc/resolv.conf | grep '\-i\-'
-  register: resolv_conf_attr
-  changed_when: false
-  failed_when: false
-
-- name: Establecer el atributo inmutable si no está
-  ansible.builtin.shell: chattr +i /etc/resolv.conf
-  when: resolv_conf_attr.rc != 0
+- name: Reemplazar /etc/resolv.conf con /etc/newresolv.conf
+  ansible.builtin.command:
+    cmd: cp /etc/newresolv.conf /etc/resolv.conf
 
 - name: Instalar paquetes necesarios
   ansible.builtin.apt:
