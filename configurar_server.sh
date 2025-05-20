@@ -169,11 +169,6 @@ cat > $PROYECTO/roles/samba_ad_dc/tasks/main.yml <<'EOF'
     enabled: no
     state: stopped
 
-######- name: Eliminar /etc/resolv.conf
-  ansible.builtin.file:
-    path: /etc/resolv.conf
-    state: absent
-
 - name: Crear /etc/newresolv.conf
   ansible.builtin.copy:
     dest: /etc/newresolv.conf
