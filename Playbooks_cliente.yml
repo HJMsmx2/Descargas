@@ -10,12 +10,12 @@
 
     - name: copiar archivo con ansible.
       copy:
-       src: ansibles/docs/instalaciones
+       src: /home/usuario/ansibles/docs/instalaciones
        dest: /home/usuario/ansible_cliente/playbook.yml  
        mode: '0644'
     - name: copiar archivo hosts
       copy: 
-       src: hostsc
+       src: /home/usuario/ansibles/hosts/host_S-C
        dest: /home/usuario/ansible_cliente/hosts
     - name: ejecutar comando ansible 
       command: ansible-playbook -i anisible_cliente/hosts ansible_cliente/playbook.yml

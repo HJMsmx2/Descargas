@@ -21,35 +21,35 @@
         mode: '0755'  
     - name: Copiar archivo de configuración named.conf.options 
       copy:
-        src:  ansibles/docs/namedcon
+        src:  /home/usuario/ansibles/docs/namedcon
         dest: /etc/bind/dns/named.conf.options  
         owner: root
         group: root
         mode: '0644'
     - name: Copiar archivo de db.local
       copy:
-        src: ansibles/docs/localdb  
+        src: /home/usuario/ansibles/docs/localdb  
         dest: /etc/bind/dns/db.server.local  
         owner: root
         group: root
         mode: '0644'
     - name: Configuracion db.ip 
       copy: 
-        src: ansibles/docs/dbip
+        src: /home/usuario/ansibles/docs/dbip
         dest: /etc/bind/dns/db.1.168.192 
         owner: root
         group: root
         mode: '0644'
     - name: Configuracion named
       copy: 
-        src: ansibles/docs/confnamed 
+        src: /home/usuario/ansibles/docs/confnamed 
         dest: /etc/default/named.conf.local 
         owner: root
         group: root
         mode: '0644'
     - name: Configuracion zonas  
       copy: 
-        src: ansibles/docs/namedlocal
+        src: /home/usuario/ansibles/docs/namedlocal
         dest: /etc/bind/named.conf.local 
         owner: root
         group: root
