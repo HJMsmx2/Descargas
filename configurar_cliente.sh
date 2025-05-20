@@ -17,7 +17,8 @@ ssh root@$SVIP1 << EOF
     echo "[+] Habilitando acceso root por SSH..."
     sed -i "s/^#\\?PermitRootLogin .*/PermitRootLogin yes/" /etc/ssh/sshd_config
     systemctl restart ssh
-    
+   
+    EOF
    
     if [[ -f ~/.ssh/id_rsa.pub ]]; then
     read -p "[?] Ya existe una clave SSH en ~/.ssh/id_rsa.pub. ¿Deseas sobrescribirla? (s/n): " RESP
