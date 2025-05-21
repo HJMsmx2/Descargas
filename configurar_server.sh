@@ -72,7 +72,6 @@ EONET
     echo "[+] Aplicando nueva configuración de red en segundo plano..."
     nohup bash -c "sleep 2 && netplan apply" > /dev/null 2>&1 &
 
-    sleep 5 
 
     echo "[✔] Configuración aplicada. Cerrando sesión."
     exit
