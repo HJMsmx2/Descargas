@@ -1,2 +1,2 @@
 [Server]
-Server1 ansible_host=root@192.168.237.2 ansible_user=root
+Server1 ansible_host=root@192.168.237.2 ansible_user=root ansible_ssh_pass=melon ansible_ssh_common_args='-o StrictHostKeyChecking=no'
