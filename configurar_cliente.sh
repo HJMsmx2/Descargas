@@ -10,7 +10,7 @@ if [[ -z "$SVIP1" || -z "$PASSsv1" || -z "$USERsv1" || -z "$PCIP3" || -z "$PASSs
 fi
 
 echo "[+] Conectando con el servidor intermedio ($SVIP1)..."
-ssh root@$SVIP1 << EOF1
+sshpass -p "$PASSsv2" ssh -o StrictHostKeyChecking=no "root@$SVIP1" bash << EOF1
     echo "[+] Instalando sshpass si es necesario..."
     apt-get update && apt-get install -y sshpass
 
