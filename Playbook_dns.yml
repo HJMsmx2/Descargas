@@ -22,7 +22,7 @@
     - name: Copiar archivo de configuración named.conf.options 
       copy:
         src:  /home/usuario/ansibles/docs/namedcon
-        dest: /etc/bind/dns/named.conf.options  
+        dest: /etc/bind/dns/named 
         owner: root
         group: root
         mode: '0644'
