@@ -12,7 +12,7 @@
       server IN A  192.168.1.2   
       
       ;Mail Server MX (Mail exchanger) Record 
-      server.local IN MX 10 mail.server.local.
+      server.local. IN MX 10 mail.server.local.
  
       ;A Record for Host names 
       www IN A 192.168.1.2
