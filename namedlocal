@@ -6,7 +6,7 @@
 // organization
 // include "/etc/bind/zones.rfc1918";
 
-zone "server.local" IN {
+zone "hjm.local" IN {
           type master;
           file "/etc/bind/dns/db.server.local";
 };
