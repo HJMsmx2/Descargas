@@ -1,18 +1,18 @@
  $TTL 604800
-      @ IN SOA primary.server.local. root.primary.server.local. (
+      @ IN SOA primary.hjm.local. root.primary.hjm.local. (
                                             2022072651 ; Serial 
                                             3600 ; Refresh 
                                             1800 ; Retry 
                                             604800 ) ; Negative Cache TTL 
       ;Name Server Information 
-      @    IN  NS   primary.server.local.
+      @    IN  NS   primary.hjm.local.
 
       ;IP address of Your domain Name Server (DNS) 
       primary IN A  192.168.1.2  
       server IN A  192.168.1.2   
       
       ;Mail Server MX (Mail exchanger) Record 
-      server.local. IN MX 10 mail.server.local.
+      hjm.local. IN MX 10 mail.hjm.local.
  
       ;A Record for Host names 
       www IN A 192.168.1.2
