@@ -1,5 +1,5 @@
 $TTL 604800
-      @ IN SOA server.local. root.server.local. (
+      @ IN SOA hjm.local. root.hjm.local. (
                                             2022072752 ; Serial 
                                             3600 ; Refresh 
                                             1800 ; Retry 
@@ -8,13 +8,13 @@ $TTL 604800
       )
 
       ;Your Name Server Info
-      @    IN  NS   primary.server.local.
+      @    IN  NS   primary.hjm.local.
       primary IN A  192.168.1.2 
       server IN A  192.168.1.2 
       
       ;Reverse Lookup for Your DNS Server 
-      2 IN PTR  primary.server.local.
+      2 IN PTR  primary.hjm.local.
  
       ;PTR Record IP address to HostName
-      2 IN PTR  www.server.local.
-      2 IN PTR  mail.server.local.
+      2 IN PTR  www.hjm.local.
+      2 IN PTR  mail.hjm.local.
