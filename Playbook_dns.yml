@@ -29,7 +29,7 @@
     - name: Copiar archivo de db.local
       copy:
         src: /home/usuario/ansibles/docs/localdb  
-        dest: /etc/bind/dns/db.server.local  
+        dest: /etc/bind/dns/db.hjm.local  
         owner: root
         group: root
         mode: '0644'
